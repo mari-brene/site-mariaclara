@@ -4,82 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Maria Clara Brene — Desenvolvedora Júnior</title>
-<meta name="description" content="Maria Clara Brene, Desenvolvedora Júnior em Joinville/SC. Next.js, React, TypeScript e Supabase.">
+<meta name="description" content="Maria Clara Brene, Desenvolvedora Júnior em Joinville/SC. React, Next.js, TypeScript, Flutter e Supabase.">
+<link rel="canonical" href="https://mari-brene.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mari-brene.vercel.app/">
 <meta property="og:title" content="Maria Clara Brene — Desenvolvedora Júnior">
 <meta property="og:description" content="Portfólio em formato de terminal. Digite help para começar.">
-<meta property="og:type" content="website">
+<meta property="og:image" content="https://mari-brene.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mari-brene.vercel.app/og.png">
 <meta name="theme-color" content="#282a36">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23282a36'/%3E%3Ctext x='5' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%2350fa7b'%3E%3E_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #282a36;
-    --bg-dark: #21222c;
-    --bg-darker: #191a21;
-    --line: #44475a;
-    --fg: #f8f8f2;
-    --comment: #6272a4;
-    --cyan: #8be9fd;
-    --green: #50fa7b;
-    --orange: #ffb86c;
-    --pink: #ff79c6;
-    --purple: #bd93f9;
-    --red: #ff5555;
-    --yellow: #f1fa8c;
-    --mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  :root, [data-theme="dracula"] {
+    --bg: #282a36; --bg-dark: #21222c; --bg-darker: #191a21; --line: #44475a;
+    --fg: #f8f8f2; --comment: #6272a4; --cyan: #8be9fd; --green: #50fa7b;
+    --orange: #ffb86c; --pink: #ff79c6; --purple: #bd93f9; --red: #ff5555; --yellow: #f1fa8c;
   }
+  [data-theme="nord"] {
+    --bg: #2e3440; --bg-dark: #2b303b; --bg-darker: #242933; --line: #4c566a;
+    --fg: #eceff4; --comment: #7b88a1; --cyan: #88c0d0; --green: #a3be8c;
+    --orange: #d08770; --pink: #b48ead; --purple: #81a1c1; --red: #bf616a; --yellow: #ebcb8b;
+  }
+  [data-theme="catppuccin"] {
+    --bg: #1e1e2e; --bg-dark: #181825; --bg-darker: #11111b; --line: #45475a;
+    --fg: #cdd6f4; --comment: #7f849c; --cyan: #89dceb; --green: #a6e3a1;
+    --orange: #fab387; --pink: #f5c2e7; --purple: #cba6f7; --red: #f38ba8; --yellow: #f9e2af;
+  }
+  [data-theme="gruvbox"] {
+    --bg: #282828; --bg-dark: #232323; --bg-darker: #1d2021; --line: #504945;
+    --fg: #ebdbb2; --comment: #928374; --cyan: #83a598; --green: #b8bb26;
+    --orange: #fe8019; --pink: #d3869b; --purple: #d3869b; --red: #fb4934; --yellow: #fabd2f;
+  }
+  :root { --mono: "JetBrains Mono", "Fira Code", Consolas, monospace; }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; }
   body {
     background: var(--bg-darker);
-    background-image: radial-gradient(circle at 20% 10%, rgba(189,147,249,.10), transparent 40%),
-                      radial-gradient(circle at 85% 90%, rgba(255,121,198,.08), transparent 40%);
+    background-image: radial-gradient(circle at 20% 10%, color-mix(in srgb, var(--purple) 12%, transparent), transparent 40%),
+                      radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--pink) 9%, transparent), transparent 40%);
     color: var(--fg);
     font: 15px/1.6 var(--mono);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 24px 16px;
+    transition: background-color .3s;
   }
   .window {
-    width: min(920px, 100%);
-    height: min(640px, calc(100vh - 120px));
+    width: min(940px, 100%);
+    height: min(660px, calc(100vh - 130px));
     min-height: 420px;
     background: var(--bg);
     border: 1px solid var(--line);
     border-radius: 10px;
     box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.3);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    display: flex; flex-direction: column; overflow: hidden;
   }
   .titlebar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    background: var(--bg-dark);
-    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; background: var(--bg-dark); border-bottom: 1px solid var(--line);
     user-select: none;
   }
   .dot { width: 12px; height: 12px; border-radius: 50%; }
   .dot.r { background: var(--red); } .dot.y { background: var(--yellow); } .dot.g { background: var(--green); }
-  .titlebar .title { flex: 1; text-align: center; color: var(--comment); font-size: 13px; margin-right: 52px; }
+  .titlebar .title { flex: 1; text-align: center; color: var(--comment); font-size: 13px; }
+  .titlebar .lang {
+    font: 12px var(--mono); color: var(--comment); background: none; border: 1px solid var(--line);
+    border-radius: 4px; padding: 1px 6px; cursor: pointer;
+  }
+  .titlebar .lang:hover, .titlebar .lang:focus-visible { color: var(--green); border-color: var(--green); outline: none; }
   #screen {
-    flex: 1;
-    overflow-y: auto;
-    padding: 18px 20px 24px;
-    cursor: text;
-    scrollbar-width: thin;
-    scrollbar-color: var(--line) transparent;
+    flex: 1; overflow-y: auto; padding: 18px 20px 24px; cursor: text;
+    scrollbar-width: thin; scrollbar-color: var(--line) transparent;
   }
   .line { white-space: pre-wrap; word-break: break-word; min-height: 1.6em; }
-  .prompt-user { color: var(--purple); }
-  .prompt-at { color: var(--fg); }
-  .prompt-host { color: var(--cyan); }
-  .prompt-path { color: var(--pink); }
+  .prompt-user { color: var(--purple); } .prompt-at { color: var(--fg); }
+  .prompt-host { color: var(--cyan); } .prompt-path { color: var(--pink); }
   .cmd { color: var(--green); }
   .c-cyan { color: var(--cyan); } .c-green { color: var(--green); } .c-pink { color: var(--pink); }
   .c-purple { color: var(--purple); } .c-yellow { color: var(--yellow); } .c-orange { color: var(--orange); }
@@ -90,60 +95,51 @@
   .ascii { color: var(--purple); line-height: 1.15; font-size: 12px; margin: 4px 0 10px; white-space: pre; overflow-x: auto; }
   .input-row { display: flex; align-items: baseline; white-space: pre; }
   .input-wrap { position: relative; flex: 1; }
-  #cmd {
-    width: 100%;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    color: var(--fg);
-    font: inherit;
-    caret-color: transparent;
-    padding: 0;
-  }
+  #cmd { width: 100%; background: transparent; border: 0; outline: 0; color: var(--fg); font: inherit; caret-color: transparent; padding: 0; }
   #ghost { position: absolute; left: 0; top: 0; pointer-events: none; white-space: pre; }
   #ghost .typed { visibility: hidden; }
-  #ghost .cursor {
-    display: inline-block; width: .6em; height: 1.15em; vertical-align: text-bottom;
-    background: var(--fg); animation: blink 1s steps(1) infinite;
-  }
+  #ghost .cursor { display: inline-block; width: .6em; height: 1.15em; vertical-align: text-bottom; background: var(--fg); animation: blink 1s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
   .grid { display: grid; grid-template-columns: max-content 1fr; column-gap: 18px; }
-  .bar { display: inline-block; height: .7em; background: var(--line); width: 160px; vertical-align: middle; border-radius: 2px; overflow: hidden; }
-  .bar > i { display: block; height: 100%; background: var(--purple); }
-  .chips {
-    width: min(920px, 100%);
-    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-    margin-top: 14px;
+  .job { margin: 2px 0 10px; }
+  .job .meta { color: var(--comment); }
+  .job ul { margin: 0; padding-left: 0; list-style: none; }
+  .job li::before { content: "› "; color: var(--green); }
+  .neo { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .neo .logo { color: var(--purple); line-height: 1.2; white-space: pre; margin: 0; }
+  .swatches span { display: inline-block; width: 22px; height: 14px; margin-right: 2px; }
+  .repo { margin-bottom: 8px; }
+  .game { margin: 6px 0 10px; }
+  .game canvas { display: block; background: var(--bg-darker); border: 1px solid var(--line); border-radius: 4px; max-width: 100%; touch-action: none; }
+  .game .pad { display: none; gap: 6px; margin-top: 8px; }
+  .game .pad button, .chips button {
+    font: 13px var(--mono); color: var(--fg); background: var(--bg); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 12px; cursor: pointer;
   }
-  .chips button {
-    font: 13px var(--mono);
-    color: var(--fg);
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 6px 12px;
-    cursor: pointer;
-  }
-  .chips button:hover, .chips button:focus-visible { border-color: var(--purple); color: var(--purple); outline: none; }
+  .game .pad button { min-width: 44px; }
+  .chips { width: min(940px, 100%); display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  .chips button:hover, .chips button:focus-visible, .game .pad button:hover { border-color: var(--purple); color: var(--purple); outline: none; }
   .chips button b { color: var(--green); font-weight: 400; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   footer { margin-top: 12px; color: var(--comment); font-size: 12px; text-align: center; }
   @media (max-width: 600px) {
     body { font-size: 13px; padding: 12px 8px; justify-content: flex-start; }
-    .window { height: calc(100vh - 150px); }
+    .window { height: calc(100vh - 190px); }
     .ascii { font-size: 8px; }
-    .bar { width: 90px; }
-    .titlebar .title { margin-right: 0; }
+    .chips button { padding: 5px 9px; font-size: 12px; }
+    .game .pad { display: flex; }
   }
+  @media (hover: none) { .game .pad { display: flex; } }
   @media (prefers-reduced-motion: reduce) { #ghost .cursor { animation: none; } }
 </style>
 </head>
 <body>
 
 <main class="window" aria-label="Terminal interativo do portfólio">
-  <div class="titlebar" aria-hidden="true">
-    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-    <span class="title">mari@portfolio: ~</span>
+  <div class="titlebar">
+    <span class="dot r" aria-hidden="true"></span><span class="dot y" aria-hidden="true"></span><span class="dot g" aria-hidden="true"></span>
+    <span class="title" aria-hidden="true">mari@portfolio: ~</span>
+    <button class="lang" id="lang-btn" type="button" aria-label="Mudar idioma">EN</button>
   </div>
   <div id="screen" role="log" aria-live="polite">
     <div id="output"></div>
@@ -158,36 +154,30 @@
   </div>
 </main>
 
-<nav class="chips" aria-label="Comandos rápidos">
-  <button data-cmd="sobre"><b>$</b> sobre</button>
-  <button data-cmd="stack"><b>$</b> stack</button>
-  <button data-cmd="projetos"><b>$</b> projetos</button>
-  <button data-cmd="formacao"><b>$</b> formacao</button>
-  <button data-cmd="contato"><b>$</b> contato</button>
-  <button data-cmd="help"><b>$</b> help</button>
-  <button data-cmd="clear"><b>$</b> clear</button>
-</nav>
+<nav class="chips" id="chips" aria-label="Comandos rápidos"></nav>
 
-<footer>Tema Dracula · Feito por Maria Clara Brene</footer>
+<footer id="footer"></footer>
 
 <script>
 (() => {
-  // ---------- Dados ----------
+  // ================= Dados =================
+  const USER = "mari-brene";
   const PERFIL = {
     nome: "Maria Clara Brene",
-    cargo: "Desenvolvedora Júnior",
-    local: "Joinville, SC — Brasil",
     email: "brenemariaclara@gmail.com",
+    whatsapp: "(38) 99936-8705",
+    curriculo: "/curriculo-maria-clara-brene.pdf",
     links: {
       github: "https://github.com/mari-brene",
       linkedin: "https://www.linkedin.com/in/maria-clara-galvao",
       instagram: "https://www.instagram.com/mgalvao.png",
       spotify: "https://open.spotify.com/user/22i3f4d5jbavg5gfcmtroaizq",
       whatsapp: "https://wa.me/5538999368705",
+      projeto: "https://github.com/mari-brene/sistema-leads-mvp",
     },
   };
 
-  const PROMPT = '<span class="prompt-user">mari</span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-at">:</span><span class="prompt-path">~</span><span class="prompt-at">$ </span>';
+  const TEMAS = ["dracula", "nord", "catppuccin", "gruvbox"];
 
   const ASCII = String.raw`
  __  __            _      ____ _
@@ -196,105 +186,348 @@
 | |  | | (_| | |  | |   | |___| | (_| | | | (_| |
 |_|  |_|\__,_|_|  |_|    \____|_|\__,_|_|  \__,_|`;
 
-  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const link = (href, txt) => `<a href="${href}" target="_blank" rel="noopener">${esc(txt || href)}</a>`;
-  const linha = (rotulo, valor) => `<span class="c-cyan">${rotulo}</span><span>${valor}</span>`;
+  const LOGO = String.raw`   __  __  ____
+  |  \/  |/ ___|
+  | |\/| | |
+  | |  | | |___
+  |_|  |_|\____|
+`;
 
-  const COMANDOS = {
-    help: {
-      desc: "lista os comandos",
-      run: () => {
-        const itens = Object.entries(COMANDOS)
-          .filter(([, c]) => !c.oculto)
-          .map(([n, c]) => `<span class="c-green">${n}</span><span class="c-comment">${c.desc}</span>`)
-          .join("");
-        return `<div class="grid">${itens}</div>
-<span class="c-comment">Dica: use Tab para completar e ↑ ↓ para o histórico.</span>`;
+  // ================= Textos (pt / en) =================
+  const T = {
+    pt: {
+      htmlLang: "pt-BR",
+      cargo: "Desenvolvedora Júnior",
+      local: "Joinville, SC — Brasil",
+      langBtn: "EN",
+      footer: "Tema {tema} · Feito por Maria Clara Brene",
+      chips: ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "help"],
+      inputLabel: "Digite um comando",
+      boot: ["Iniciando <span class=\"c-purple\">MariOS</span> 2.0.26", "Carregando módulos: react, next, flutter, supabase", "Conectando ao café", "Montando /home/mari"],
+      hello: (n, c) => `Olá! Eu sou a <span class="c-pink">${n}</span>, <span class="c-yellow">${c}</span>.`,
+      hint: `Digite <span class="c-green">help</span> para ver os comandos ou use os botões abaixo.`,
+      notFound: (n) => `<span class="c-red">comando não encontrado:</span> ${n} — digite <span class="c-green">help</span>`,
+      tip: "Dica: Tab completa, ↑ ↓ navega no histórico, Ctrl+L limpa. Há comandos secretos por aí.",
+      desc: {
+        help: "lista os comandos", sobre: "quem eu sou", experiencia: "onde já trabalhei",
+        projetos: "o que já construí", stack: "tecnologias que uso", formacao: "formação e idiomas",
+        curriculo: "baixa meu currículo (PDF)", contato: "onde me encontrar", neofetch: "resumo do sistema, ao vivo",
+        github: "meus repositórios, ao vivo", tema: "troca o tema de cores", lang: "muda o idioma (pt / en)",
+        whatsapp: "abre conversa no WhatsApp", linkedin: "abre meu LinkedIn", email: "envia um e-mail", clear: "limpa a tela",
       },
-    },
-    sobre: {
-      desc: "quem eu sou",
-      run: () => `<span class="tag">${PERFIL.nome}</span>
-<div class="grid">${linha("cargo", PERFIL.cargo)}${linha("local", PERFIL.local)}${linha("foco", "aplicações web full stack com Next.js e Supabase")}</div>
-Gosto de transformar processos manuais em sistemas simples de usar. Hoje construo um CRM multi-clientes com Kanban, caixa de entrada, integração com WhatsApp e respostas com IA — do banco de dados ao deploy.
-<span class="c-comment"># veja também: stack, projetos, contato</span>`,
-    },
-    whoami: { desc: "", oculto: true, run: () => `<span class="c-purple">mari</span> — ${PERFIL.cargo}` },
-    stack: {
-      desc: "tecnologias que uso",
-      run: () => {
-        const grupos = [
-          ["front-end", "React · Next.js · TypeScript · JavaScript · HTML · CSS"],
-          ["back-end", "Node.js · API Routes · Supabase · PostgreSQL · MySQL · PHP"],
-          ["devops", "Git · GitHub Actions · Vercel"],
-          ["mobile", "Flutter · Dart · Android"],
-          ["jogos", "Unity · C# · Lua"],
-          ["outras", "C · C++ · Java · Python · Linux · Figma"],
-        ];
-        return `<div class="grid">${grupos.map(([g, t]) => linha(g, t)).join("")}</div>`;
-      },
-    },
-    projetos: {
-      desc: "o que estou construindo",
-      run: () => `<span class="tag">Sistema Leads MVP</span>  ${link("https://github.com/mari-brene/sistema-leads-mvp", "github.com/mari-brene/sistema-leads-mvp")}
-CRM multi-clientes para prospecção e atendimento via WhatsApp.
-<span class="c-green">✓</span> Kanban de leads e caixa de entrada em 3 colunas
-<span class="c-green">✓</span> Isolamento entre clientes com papéis (admin, gestor, atendente)
-<span class="c-green">✓</span> Busca de empresas via OpenStreetMap e importação de CSV
-<span class="c-green">✓</span> Autoresponder e prospecção assistida com IA (Groq / Gemini)
-<span class="c-green">✓</span> Integração com Google Agenda e agendador com GitHub Actions
-<span class="c-comment">stack:</span> <span class="c-yellow">Next.js · TypeScript · Supabase · Vercel</span>
-
-<span class="c-comment"># mais projetos em</span> ${link(PERFIL.links.github, "github.com/mari-brene")}`,
-    },
-    formacao: {
-      desc: "formação acadêmica",
-      run: () => `<div class="grid">${[
-        ["2025", "Análise e Desenvolvimento de Sistemas — IFTM"],
+      sobre: `Graduada em Análise e Desenvolvimento de Sistemas, com experiência prática em aplicações web e mobile e integração de sistemas. Já participei do desenvolvimento de soluções Full Stack para clientes reais, de um app em Flutter e Firebase com Bluetooth e Machine Learning, e hoje construo um CRM multi-clientes com Next.js, Supabase e IA — do banco de dados ao deploy.
+Também tenho experiência em liderança de equipe e em ensinar programação.`,
+      foco: "aplicações web e mobile full stack",
+      vejaTambem: "# veja também: experiencia, projetos, contato",
+      experiencia: [
+        { cargo: "Instrutora de Desenvolvimento de Jogos", onde: "Arcade Academy", meta: "Joinville, SC · out/2025 – dez/2025 · temporário",
+          itens: ["Aulas de desenvolvimento de jogos para crianças, com atividades práticas de programação.", "Verse e Lua, nas plataformas UEFN e Roblox Studio.", "Foco em raciocínio lógico, criatividade e resolução de problemas."] },
+        { cargo: "Presidente e Desenvolvedora", onde: "Techfy Empresa Júnior (IFTM)", meta: "Paracatu, MG · abr/2025 – jun/2025",
+          itens: ["Liderei operações, captação de projetos e coordenação de equipes.", "Conciliei gestão com programação de soluções sob medida.", "Entrega de sistemas Full Stack para clientes reais."] },
+        { cargo: "Suporte Técnico / Field Service", onde: "Superintendência Regional de Ensino de Paracatu", meta: "Paracatu, MG · dez/2023 – mai/2025 · estágio",
+          itens: ["Suporte a mais de 200 estações em 15 escolas: diagnóstico, manutenção e troca de componentes.", "Instalação de Windows/Linux e manutenção de redes LAN/WAN.", "Protocolos preventivos que reduziram em 30% o tempo de inatividade.", "Apoio a mais de 50 usuários na adoção de ferramentas."] },
+      ],
+      voluntario: "# voluntariado: STEM Por Elas (2025), Burburinho Cultural — jogos com Scratch e Roblox (2023)",
+      projetos: [
+        { nome: "Sistema Leads MVP", link: "https://github.com/mari-brene/sistema-leads-mvp", meta: "2026 · projeto pessoal",
+          desc: "CRM multi-clientes para prospecção e atendimento via WhatsApp.",
+          itens: ["Kanban de leads, caixa de entrada e importação de CSV", "Isolamento entre clientes com papéis (admin, gestor, atendente)", "Respostas e prospecção assistida com IA (Groq / Gemini)", "Google Agenda, GitHub Actions e deploy na Vercel"],
+          stack: "Next.js · TypeScript · Supabase · Vercel" },
+        { nome: "GlicoMetrics", meta: "IFTM · mai/2024 – dez/2024 · pesquisadora bolsista",
+          desc: "Aplicação Full Stack para monitoramento e controle de diabetes.",
+          itens: ["App em Flutter com Firebase", "Integração via Bluetooth", "Funcionalidades com Machine Learning"],
+          stack: "Flutter · Dart · Firebase" },
+        { nome: "Robótica Educacional — equipe J.A.R.V.I.S.", meta: "IFTM · 2019 · Olimpíada Brasileira de Robótica",
+          desc: "Hardware e software para robôs autônomos de competição.",
+          itens: ["Programação em C++ e Arduino", "Otimização do controle dos robôs"],
+          stack: "C++ · Arduino" },
+      ],
+      maisProjetos: "# mais projetos em",
+      stack: [
+        ["web", "React · Next.js · TypeScript · JavaScript · HTML5 · CSS3 · Node.js"],
+        ["mobile", "Flutter · Dart · React Native"],
+        ["dados", "Supabase · PostgreSQL · MySQL · Firebase"],
+        ["integração", "APIs REST/SOAP · Bluetooth · Machine Learning"],
+        ["infra", "Git · GitHub Actions · CI/CD · Docker · Vercel · Linux"],
+        ["linguagens", "C · C++ · Java · Python · Lua · Verse"],
+        ["jogos", "UEFN · Roblox Studio · Unity · Scratch"],
+      ],
+      formacao: [
         ["2028*", "Jogos Digitais — UNOPAR <span class=\"c-comment\">(em andamento)</span>"],
+        ["2025", "Análise e Desenvolvimento de Sistemas — IFTM"],
         ["2019", "Técnico em Eletrônica — IFTM"],
-      ].map(([a, c]) => `<span class="c-orange">${a}</span><span>${c}</span>`).join("")}</div>`,
+      ],
+      idiomas: "idiomas", idiomasTxt: "Português (nativo) · Inglês (intermediário) · Espanhol (intermediário)",
+      curriculo: "baixando o currículo...", curriculoLink: "abrir o PDF",
+      aberta: "Aberta a oportunidades como Desenvolvedora Júnior.",
+      ouvindo: "o que estou ouvindo",
+      abrindo: "abrindo", abrindoEmail: "abrindo o cliente de e-mail...",
+      carregando: "buscando dados no GitHub...", erroApi: "não consegui falar com o GitHub agora. Tente de novo em instantes.",
+      neo: { os: "Sistema", host: "Local", uptime: "No GitHub há", repos: "Repos públicos", seguidores: "Seguidores", contrib: "Contribuições", commits: "Commits", langs: "Top linguagens", tema: "Tema", idioma: "Idioma" },
+      anos: (a, m) => `${a} ano${a === 1 ? "" : "s"}, ${m} ${m === 1 ? "mês" : "meses"}`,
+      atualizado: "atualizado", semDesc: "sem descrição",
+      temaAtual: (t) => `tema atual: <span class="c-green">${t}</span>`,
+      temaUso: "uso: tema <nome>   ·   disponíveis:",
+      temaOk: (t) => `tema alterado para <span class="c-green">${t}</span>`,
+      temaErro: (t) => `<span class="c-red">tema desconhecido:</span> ${t}`,
+      langOk: "idioma: português",
+      ls: `<span class="c-cyan">sobre/</span>  <span class="c-cyan">experiencia/</span>  <span class="c-cyan">projetos/</span>  <span class="c-cyan">jogos/</span>  curriculo.pdf  contato.txt`,
+      lsJogos: `<span class="c-green">snake</span>  <span class="c-comment"># digite o nome para jogar</span>`,
+      sudo: `<span class="c-red">mari não está no arquivo sudoers.</span> Este incidente será reportado. ;)`,
+      exit: `<span class="c-comment">Não tem como sair daqui. Que tal</span> <span class="c-green">contato</span><span class="c-comment">?</span>`,
+      jogo: { titulo: "SNAKE", ajuda: "setas/WASD ou deslize · Esc sai", fim: (p, r) => `fim de jogo! pontos: <span class="c-yellow">${p}</span> · recorde: <span class="c-pink">${r}</span>`, sair: "sair" },
     },
-    contato: {
-      desc: "onde me encontrar",
-      run: () => `<div class="grid">${[
-        ["email", `<a href="mailto:${PERFIL.email}">${PERFIL.email}</a>`],
-        ["whatsapp", link(PERFIL.links.whatsapp, "(38) 99936-8705")],
-        ["linkedin", link(PERFIL.links.linkedin, "in/maria-clara-galvao")],
-        ["github", link(PERFIL.links.github, "mari-brene")],
-        ["instagram", link(PERFIL.links.instagram, "@mgalvao.png")],
-        ["spotify", link(PERFIL.links.spotify, "o que estou ouvindo")],
-      ].map(([r, v]) => linha(r, v)).join("")}</div>
-<span class="c-green">Aberta a oportunidades como ${PERFIL.cargo}.</span>`,
+    en: {
+      htmlLang: "en",
+      cargo: "Junior Developer",
+      local: "Joinville, SC — Brazil",
+      langBtn: "PT",
+      footer: "{tema} theme · Made by Maria Clara Brene",
+      chips: ["about", "experience", "projects", "stack", "education", "resume", "contact", "help"],
+      inputLabel: "Type a command",
+      boot: ["Booting <span class=\"c-purple\">MariOS</span> 2.0.26", "Loading modules: react, next, flutter, supabase", "Connecting to coffee", "Mounting /home/mari"],
+      hello: (n, c) => `Hi! I'm <span class="c-pink">${n}</span>, <span class="c-yellow">${c}</span>.`,
+      hint: `Type <span class="c-green">help</span> to see the commands or use the buttons below.`,
+      notFound: (n) => `<span class="c-red">command not found:</span> ${n} — type <span class="c-green">help</span>`,
+      tip: "Tip: Tab completes, ↑ ↓ browses history, Ctrl+L clears. There are secret commands around.",
+      desc: {
+        help: "lists the commands", sobre: "who I am", experiencia: "where I've worked",
+        projetos: "what I've built", stack: "technologies I use", formacao: "education and languages",
+        curriculo: "downloads my resume (PDF, Portuguese)", contato: "where to find me", neofetch: "live system summary",
+        github: "my repositories, live", tema: "changes the color theme", lang: "changes the language (pt / en)",
+        whatsapp: "opens a WhatsApp chat", linkedin: "opens my LinkedIn", email: "sends an email", clear: "clears the screen",
+      },
+      sobre: `Graduated in Systems Analysis and Development, with hands-on experience in web and mobile applications and systems integration. I've helped build Full Stack solutions for real clients and a Flutter + Firebase app with Bluetooth and Machine Learning, and today I'm building a multi-tenant CRM with Next.js, Supabase and AI — from the database to the deploy.
+I also have experience leading teams and teaching programming.`,
+      foco: "full stack web and mobile applications",
+      vejaTambem: "# see also: experience, projects, contact",
+      experiencia: [
+        { cargo: "Game Development Instructor", onde: "Arcade Academy", meta: "Joinville, SC · Oct 2025 – Dec 2025 · temporary",
+          itens: ["Taught game development to kids through hands-on programming activities.", "Verse and Lua, on UEFN and Roblox Studio.", "Focus on logical reasoning, creativity and problem solving."] },
+        { cargo: "President and Developer", onde: "Techfy Junior Enterprise (IFTM)", meta: "Paracatu, MG · Apr 2025 – Jun 2025",
+          itens: ["Led operations, client acquisition and team coordination.", "Balanced management with building custom software.", "Delivered Full Stack systems to real clients."] },
+        { cargo: "IT Support / Field Service", onde: "Regional Education Office of Paracatu", meta: "Paracatu, MG · Dec 2023 – May 2025 · internship",
+          itens: ["Supported 200+ workstations across 15 schools: diagnostics, maintenance and repairs.", "Windows/Linux setup and LAN/WAN network maintenance.", "Preventive protocols that cut system downtime by 30%.", "Helped 50+ users adopt tools and good practices."] },
+      ],
+      voluntario: "# volunteering: STEM Por Elas (2025), Burburinho Cultural — games with Scratch and Roblox (2023)",
+      projetos: [
+        { nome: "Sistema Leads MVP", link: "https://github.com/mari-brene/sistema-leads-mvp", meta: "2026 · personal project",
+          desc: "Multi-tenant CRM for prospecting and customer service via WhatsApp.",
+          itens: ["Lead Kanban, inbox and CSV import", "Tenant isolation with roles (admin, manager, agent)", "AI-assisted replies and prospecting (Groq / Gemini)", "Google Calendar, GitHub Actions and Vercel deploy"],
+          stack: "Next.js · TypeScript · Supabase · Vercel" },
+        { nome: "GlicoMetrics", meta: "IFTM · May 2024 – Dec 2024 · research fellow",
+          desc: "Full Stack application for diabetes monitoring and control.",
+          itens: ["Flutter app with Firebase", "Bluetooth integration", "Machine Learning features"],
+          stack: "Flutter · Dart · Firebase" },
+        { nome: "Educational Robotics — team J.A.R.V.I.S.", meta: "IFTM · 2019 · Brazilian Robotics Olympiad",
+          desc: "Hardware and software for autonomous competition robots.",
+          itens: ["Programming in C++ and Arduino", "Robot control optimization"],
+          stack: "C++ · Arduino" },
+      ],
+      maisProjetos: "# more projects at",
+      stack: [
+        ["web", "React · Next.js · TypeScript · JavaScript · HTML5 · CSS3 · Node.js"],
+        ["mobile", "Flutter · Dart · React Native"],
+        ["data", "Supabase · PostgreSQL · MySQL · Firebase"],
+        ["integration", "REST/SOAP APIs · Bluetooth · Machine Learning"],
+        ["infra", "Git · GitHub Actions · CI/CD · Docker · Vercel · Linux"],
+        ["languages", "C · C++ · Java · Python · Lua · Verse"],
+        ["games", "UEFN · Roblox Studio · Unity · Scratch"],
+      ],
+      formacao: [
+        ["2028*", "Digital Games — UNOPAR <span class=\"c-comment\">(in progress)</span>"],
+        ["2025", "Systems Analysis and Development — IFTM"],
+        ["2019", "Electronics Technician — IFTM"],
+      ],
+      idiomas: "languages", idiomasTxt: "Portuguese (native) · English (intermediate) · Spanish (intermediate)",
+      curriculo: "downloading the resume...", curriculoLink: "open the PDF",
+      aberta: "Open to opportunities as a Junior Developer.",
+      ouvindo: "what I'm listening to",
+      abrindo: "opening", abrindoEmail: "opening your email client...",
+      carregando: "fetching data from GitHub...", erroApi: "couldn't reach GitHub right now. Try again in a moment.",
+      neo: { os: "OS", host: "Location", uptime: "On GitHub for", repos: "Public repos", seguidores: "Followers", contrib: "Contributions", commits: "Commits", langs: "Top languages", tema: "Theme", idioma: "Language" },
+      anos: (a, m) => `${a} year${a === 1 ? "" : "s"}, ${m} month${m === 1 ? "" : "s"}`,
+      atualizado: "updated", semDesc: "no description",
+      temaAtual: (t) => `current theme: <span class="c-green">${t}</span>`,
+      temaUso: "usage: theme <name>   ·   available:",
+      temaOk: (t) => `theme changed to <span class="c-green">${t}</span>`,
+      temaErro: (t) => `<span class="c-red">unknown theme:</span> ${t}`,
+      langOk: "language: english",
+      ls: `<span class="c-cyan">about/</span>  <span class="c-cyan">experience/</span>  <span class="c-cyan">projects/</span>  <span class="c-cyan">games/</span>  resume.pdf  contact.txt`,
+      lsJogos: `<span class="c-green">snake</span>  <span class="c-comment"># type its name to play</span>`,
+      sudo: `<span class="c-red">mari is not in the sudoers file.</span> This incident will be reported. ;)`,
+      exit: `<span class="c-comment">There's no way out. How about</span> <span class="c-green">contact</span><span class="c-comment">?</span>`,
+      jogo: { titulo: "SNAKE", ajuda: "arrows/WASD or swipe · Esc quits", fim: (p, r) => `game over! score: <span class="c-yellow">${p}</span> · best: <span class="c-pink">${r}</span>`, sair: "quit" },
     },
-    github: { desc: "abre meu GitHub", run: () => abrir(PERFIL.links.github) },
-    linkedin: { desc: "abre meu LinkedIn", run: () => abrir(PERFIL.links.linkedin) },
-    whatsapp: { desc: "abre conversa no WhatsApp", run: () => abrir(PERFIL.links.whatsapp) },
-    email: { desc: "envia um e-mail", run: () => { location.href = `mailto:${PERFIL.email}`; return `<span class="c-comment">abrindo o cliente de e-mail...</span>`; } },
-    clear: { desc: "limpa a tela", run: () => { out.innerHTML = ""; return null; } },
-    date: { desc: "", oculto: true, run: () => new Date().toLocaleString("pt-BR") },
-    ls: { desc: "", oculto: true, run: () => `<span class="c-cyan">sobre/</span>  <span class="c-cyan">stack/</span>  <span class="c-cyan">projetos/</span>  <span class="c-cyan">formacao/</span>  contato.txt` },
-    sudo: { desc: "", oculto: true, run: () => `<span class="c-red">mari não está no arquivo sudoers.</span> Este incidente será reportado. ;)` },
-    exit: { desc: "", oculto: true, run: () => `<span class="c-comment">Não tem como sair daqui. Que tal</span> <span class="c-green">contato</span><span class="c-comment">?</span>` },
   };
+
+  // aliases em inglês -> comando
+  const ALIAS = {
+    about: "sobre", experience: "experiencia", projects: "projetos", education: "formacao",
+    resume: "curriculo", cv: "curriculo", contact: "contato", theme: "tema", language: "lang",
+    "experiência": "experiencia", "formação": "formacao", "currículo": "curriculo", whoami: "sobre",
+  };
+  // nome mostrado no help conforme idioma
+  const NOME_EN = { sobre: "about", experiencia: "experience", projetos: "projects", formacao: "education", curriculo: "resume", contato: "contact", tema: "theme" };
+
+  // ================= Estado =================
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  };
+  let lang = store.get("mari.lang") || ((navigator.language || "pt").toLowerCase().startsWith("pt") ? "pt" : "en");
+  if (!T[lang]) lang = "pt";
+  let tema = TEMAS.includes(store.get("mari.tema")) ? store.get("mari.tema") : "dracula";
+  const L = () => T[lang];
+
+  // ================= Utilidades =================
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const link = (href, txt) => `<a href="${href}" target="_blank" rel="noopener">${esc(txt || href.replace(/^https?:\/\//, ""))}</a>`;
+  const linha = (r, v) => `<span class="c-cyan">${r}</span><span>${v}</span>`;
+  const nomeCmd = (c) => (lang === "en" && NOME_EN[c]) || c;
+  const prompt = () => `<span class="prompt-user">mari</span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-at">:</span><span class="prompt-path">~</span><span class="prompt-at">$ </span>`;
 
   function abrir(url) {
     window.open(url, "_blank", "noopener");
-    return `<span class="c-comment">abrindo</span> ${link(url)}`;
+    return `<span class="c-comment">${L().abrindo}</span> ${link(url)}`;
   }
 
-  // ---------- Terminal ----------
+  // ================= GitHub (ao vivo) =================
+  const cache = {};
+  async function getJSON(url) {
+    if (cache[url]) return cache[url];
+    const r = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+    if (!r.ok) throw new Error(r.status);
+    return (cache[url] = await r.json());
+  }
+  async function statsDoCard() {
+    // lê o card gerado pelo workflow do perfil (contribuições públicas + privadas)
+    const url = `https://raw.githubusercontent.com/${USER}/${USER}/output/stats.svg`;
+    if (cache[url]) return cache[url];
+    const svg = await (await fetch(url)).text();
+    const out = {};
+    for (const m of svg.matchAll(/class="l">([^<:]+):<\/text><text[^>]*class="v">(\d+)/g)) out[m[1]] = +m[2];
+    return (cache[url] = out);
+  }
+  async function topLinguagens(repos) {
+    const tot = {};
+    await Promise.all(repos.filter((r) => !r.fork && r.name !== USER).map(async (r) => {
+      try { const l = await getJSON(r.languages_url); for (const [k, v] of Object.entries(l)) tot[k] = (tot[k] || 0) + v; } catch {}
+    }));
+    const soma = Object.values(tot).reduce((a, b) => a + b, 0) || 1;
+    return Object.entries(tot).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, v]) => `${k} ${(v / soma * 100).toFixed(0)}%`);
+  }
+  function tempoDesde(iso) {
+    const d = new Date(iso), n = new Date();
+    let m = (n.getFullYear() - d.getFullYear()) * 12 + n.getMonth() - d.getMonth();
+    if (n.getDate() < d.getDate()) m--;
+    return L().anos(Math.floor(m / 12), m % 12);
+  }
+  function relativo(iso) {
+    const s = (Date.now() - new Date(iso)) / 1000;
+    const rtf = new Intl.RelativeTimeFormat(lang === "pt" ? "pt-BR" : "en", { numeric: "auto" });
+    for (const [u, n] of [["year", 31536000], ["month", 2592000], ["day", 86400], ["hour", 3600], ["minute", 60]])
+      if (s >= n) return rtf.format(-Math.floor(s / n), u);
+    return rtf.format(0, "minute");
+  }
+
+  // ================= Comandos =================
+  const COMANDOS = {
+    help: { run: () => {
+      const lista = ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "neofetch", "github", "whatsapp", "linkedin", "email", "tema", "lang", "clear", "help"];
+      return `<div class="grid">${lista.map((c) => `<span class="c-green">${nomeCmd(c)}</span><span class="c-comment">${L().desc[c]}</span>`).join("")}</div>
+<span class="c-comment">${L().tip}</span>`;
+    } },
+    sobre: { run: () => `<span class="tag">${PERFIL.nome}</span>
+<div class="grid">${linha(lang === "pt" ? "cargo" : "role", L().cargo)}${linha(lang === "pt" ? "local" : "location", L().local)}${linha(lang === "pt" ? "foco" : "focus", L().foco)}</div>
+${L().sobre}
+<span class="c-comment">${L().vejaTambem}</span>` },
+    experiencia: { run: () => L().experiencia.map((j) => `<div class="job"><span class="c-pink">${j.cargo}</span> <span class="c-comment">@</span> <span class="c-yellow">${j.onde}</span>
+<span class="meta">${j.meta}</span>
+<ul>${j.itens.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("") + `<span class="c-comment">${L().voluntario}</span>` },
+    projetos: { run: () => L().projetos.map((p) => `<div class="job"><span class="tag">${p.nome}</span>${p.link ? "  " + link(p.link) : ""}
+<span class="meta">${p.meta}</span>
+${p.desc}
+<ul>${p.itens.map((i) => `<li>${i}</li>`).join("")}</ul><span class="c-comment">stack:</span> <span class="c-yellow">${p.stack}</span></div>`).join("") + `<span class="c-comment">${L().maisProjetos}</span> ${link(PERFIL.links.github)}` },
+    stack: { run: () => `<div class="grid">${L().stack.map(([g, t]) => linha(g, t)).join("")}</div>` },
+    formacao: { run: () => `<div class="grid">${L().formacao.map(([a, c]) => `<span class="c-orange">${a}</span><span>${c}</span>`).join("")}</div>
+<div class="grid">${linha(L().idiomas, L().idiomasTxt)}</div>` },
+    curriculo: { run: () => {
+      const a = document.createElement("a");
+      a.href = PERFIL.curriculo; a.download = "curriculo-maria-clara-brene.pdf";
+      document.body.appendChild(a); a.click(); a.remove();
+      return `<span class="c-comment">${L().curriculo}</span> <a href="${PERFIL.curriculo}" target="_blank" rel="noopener">${L().curriculoLink}</a>`;
+    } },
+    contato: { run: () => `<div class="grid">${[
+      ["email", `<a href="mailto:${PERFIL.email}">${PERFIL.email}</a>`],
+      ["whatsapp", link(PERFIL.links.whatsapp, PERFIL.whatsapp)],
+      ["linkedin", link(PERFIL.links.linkedin, "in/maria-clara-galvao")],
+      ["github", link(PERFIL.links.github, USER)],
+      ["instagram", link(PERFIL.links.instagram, "@mgalvao.png")],
+      ["spotify", link(PERFIL.links.spotify, L().ouvindo)],
+    ].map(([r, v]) => linha(r, v)).join("")}</div>
+<span class="c-green">${L().aberta}</span>` },
+    neofetch: { async: true, run: async () => {
+      const [u, repos, st] = await Promise.all([
+        getJSON(`https://api.github.com/users/${USER}`),
+        getJSON(`https://api.github.com/users/${USER}/repos?per_page=100`),
+        statsDoCard().catch(() => ({})),
+      ]);
+      const langs = await topLinguagens(repos);
+      const N = L().neo;
+      const info = [
+        `<span class="c-pink">mari</span>@<span class="c-cyan">github</span>`, `<span class="c-comment">-------------------</span>`,
+        linha(N.os + ":", "MariOS 2.0.26"), linha(N.host + ":", L().local), linha(N.uptime + ":", tempoDesde(u.created_at)),
+        linha(N.repos + ":", u.public_repos), linha(N.seguidores + ":", u.followers),
+        st["Contribuições"] != null ? linha(N.contrib + ":", st["Contribuições"]) : "",
+        st["Commits"] != null ? linha(N.commits + ":", st["Commits"]) : "",
+        linha(N.langs + ":", langs.join(" · ") || "-"), linha(N.tema + ":", tema), linha(N.idioma + ":", lang),
+        `<span class="swatches">${["red", "green", "yellow", "purple", "pink", "cyan", "orange", "fg"].map((c) => `<span style="background:var(--${c})"></span>`).join("")}</span>`,
+      ].filter(Boolean);
+      return `<div class="neo"><pre class="logo">${esc(LOGO)}</pre><div>${info.map((l) => l.startsWith("<span class=\"c-cyan\">") ? `<div class="grid">${l}</div>` : `<div>${l}</div>`).join("")}</div></div>`;
+    } },
+    github: { async: true, run: async () => {
+      const repos = (await getJSON(`https://api.github.com/users/${USER}/repos?sort=pushed&per_page=100`)).filter((r) => !r.fork);
+      return repos.map((r) => `<div class="repo">${link(r.html_url, r.name)}${r.language ? `  <span class="c-yellow">${esc(r.language)}</span>` : ""}${r.stargazers_count ? `  <span class="c-orange">★ ${r.stargazers_count}</span>` : ""}
+<span class="${r.description ? "" : "c-comment"}">${esc(r.description || L().semDesc)}</span>
+<span class="c-comment">${L().atualizado} ${relativo(r.pushed_at)}</span></div>`).join("") + `<span class="c-comment">${L().maisProjetos}</span> ${link(PERFIL.links.github)}`;
+    } },
+    tema: { run: (args) => {
+      const t = (args[0] || "").toLowerCase();
+      if (!t) return `${L().temaAtual(tema)}\n<span class="c-comment">${L().temaUso}</span> ${TEMAS.map((x) => `<span class="c-green">${x}</span>`).join("  ")}`;
+      if (!TEMAS.includes(t)) return `${L().temaErro(esc(t))}\n<span class="c-comment">${L().temaUso}</span> ${TEMAS.join("  ")}`;
+      aplicarTema(t);
+      return L().temaOk(t);
+    } },
+    lang: { run: (args) => {
+      const novo = (args[0] || (lang === "pt" ? "en" : "pt")).toLowerCase().slice(0, 2);
+      if (!T[novo]) return `<span class="c-comment">pt · en</span>`;
+      aplicarIdioma(novo);
+      return L().langOk;
+    } },
+    whatsapp: { run: () => abrir(PERFIL.links.whatsapp) },
+    linkedin: { run: () => abrir(PERFIL.links.linkedin) },
+    email: { run: () => { location.href = `mailto:${PERFIL.email}`; return `<span class="c-comment">${L().abrindoEmail}</span>`; } },
+    clear: { run: () => { out.innerHTML = ""; return null; } },
+    // secretos
+    ls: { run: (a) => (a[0] || "").replace(/\/$/, "").match(/^(jogos|games)$/) ? L().lsJogos : L().ls },
+    cd: { run: (a) => (a[0] || "").replace(/\/$/, "").match(/^(jogos|games)$/) ? L().lsJogos : "" },
+    snake: { run: () => { iniciarSnake(); return null; } },
+    sudo: { run: () => L().sudo },
+    exit: { run: () => L().exit },
+    date: { run: () => new Date().toLocaleString(lang === "pt" ? "pt-BR" : "en") },
+    echo: { run: (a) => esc(a.join(" ")) },
+  };
+
+  // ================= Terminal =================
   const screen = document.getElementById("screen");
   const out = document.getElementById("output");
   const row = document.getElementById("input-row");
   const input = document.getElementById("cmd");
   const ghostTyped = document.querySelector("#ghost .typed");
-  document.getElementById("prompt-live").innerHTML = PROMPT;
-
   const reduzido = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const historico = [];
-  let posHist = 0;
-  let ocupado = false;
+  let posHist = 0, ocupado = false, jogando = false;
 
   const rolar = () => { screen.scrollTop = screen.scrollHeight; };
   const imprimir = (html, cls = "") => {
@@ -307,97 +540,178 @@ CRM multi-clientes para prospecção e atendimento via WhatsApp.
   };
   const espera = (ms) => new Promise((r) => setTimeout(r, reduzido ? 0 : ms));
 
+  function mostrarInput(v) { row.hidden = !v; if (v) focar(); }
+  function focar() { if (!ocupado && !jogando) input.focus({ preventScroll: true }); rolar(); }
+
   async function digitar(texto) {
-    const div = imprimir(PROMPT + '<span class="cmd"></span>');
+    const div = imprimir(prompt() + '<span class="cmd"></span>');
     const alvo = div.querySelector(".cmd");
-    for (const ch of texto) { alvo.textContent += ch; await espera(55 + Math.random() * 50); }
-    await espera(250);
+    for (const ch of texto) { alvo.textContent += ch; await espera(45 + Math.random() * 45); }
+    await espera(200);
   }
 
-  function executar(bruto, ecoar = true) {
+  async function executar(bruto, ecoar = true) {
     const texto = bruto.trim();
-    if (ecoar) imprimir(PROMPT + `<span class="cmd">${esc(texto)}</span>`);
+    if (ecoar) imprimir(prompt() + `<span class="cmd">${esc(texto)}</span>`);
     if (!texto) return;
-    historico.push(texto);
-    posHist = historico.length;
-    const nome = texto.split(/\s+/)[0].toLowerCase();
+    historico.push(texto); posHist = historico.length;
+    const [primeiro, ...args] = texto.split(/\s+/);
+    const nome = ALIAS[primeiro.toLowerCase()] || primeiro.toLowerCase();
     const cmd = COMANDOS[nome];
-    if (!cmd) {
-      imprimir(`<span class="c-red">comando não encontrado:</span> ${esc(nome)} — digite <span class="c-green">help</span>`);
-      return;
+    if (!cmd) { imprimir(L().notFound(esc(primeiro))); imprimir(""); return; }
+    if (cmd.async) {
+      ocupado = true; mostrarInput(false);
+      const aviso = imprimir(`<span class="c-comment">${L().carregando}</span>`);
+      try { aviso.innerHTML = await cmd.run(args); }
+      catch { aviso.innerHTML = `<span class="c-red">${L().erroApi}</span>`; }
+      ocupado = false; mostrarInput(true);
+      imprimir(""); return;
     }
-    const res = cmd.run();
+    const res = cmd.run(args);
     if (res) imprimir(res);
-    imprimir("");
+    if (res !== null && !jogando) imprimir("");
   }
 
   async function rodarDigitando(texto) {
-    if (ocupado) return;
-    ocupado = true;
-    row.hidden = true;
+    if (ocupado || jogando) return;
+    ocupado = true; mostrarInput(false);
     await digitar(texto);
-    executar(texto, false);
-    row.hidden = false;
     ocupado = false;
-    focar();
+    await executar(texto, false);
+    if (!jogando) mostrarInput(true);
   }
 
-  function focar() { if (!ocupado) input.focus({ preventScroll: true }); rolar(); }
   const sincronizarGhost = () => { ghostTyped.textContent = input.value.slice(0, input.selectionStart ?? input.value.length); };
-
-  input.addEventListener("input", sincronizarGhost);
-  input.addEventListener("keyup", sincronizarGhost);
-  input.addEventListener("click", sincronizarGhost);
+  ["input", "keyup", "click"].forEach((e) => input.addEventListener(e, sincronizarGhost));
   input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      executar(input.value);
-      input.value = "";
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      if (posHist > 0) input.value = historico[--posHist];
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      posHist = Math.min(posHist + 1, historico.length);
-      input.value = historico[posHist] || "";
-    } else if (e.key === "Tab") {
+    if (e.key === "Enter") { const v = input.value; input.value = ""; executar(v); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); if (posHist > 0) input.value = historico[--posHist]; }
+    else if (e.key === "ArrowDown") { e.preventDefault(); posHist = Math.min(posHist + 1, historico.length); input.value = historico[posHist] || ""; }
+    else if (e.key === "Tab") {
       e.preventDefault();
       const v = input.value.trim().toLowerCase();
-      const opcoes = Object.keys(COMANDOS).filter((c) => !COMANDOS[c].oculto && c.startsWith(v));
-      if (opcoes.length === 1) input.value = opcoes[0];
-      else if (opcoes.length > 1) { imprimir(PROMPT + esc(input.value)); imprimir(opcoes.map((o) => `<span class="c-green">${o}</span>`).join("  ")); }
-    } else if (e.key === "l" && e.ctrlKey) {
-      e.preventDefault();
-      out.innerHTML = "";
-    }
+      const nomes = ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "neofetch", "github", "whatsapp", "linkedin", "email", "tema", "lang", "clear", "help"].map(nomeCmd);
+      const op = nomes.filter((c) => c.startsWith(v));
+      if (op.length === 1) input.value = op[0];
+      else if (op.length > 1) { imprimir(prompt() + esc(input.value)); imprimir(op.map((o) => `<span class="c-green">${o}</span>`).join("  ")); }
+    } else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); out.innerHTML = ""; }
     requestAnimationFrame(sincronizarGhost);
   });
-
   screen.addEventListener("click", () => { if (!getSelection().toString()) focar(); });
-  document.querySelectorAll(".chips button").forEach((b) =>
-    b.addEventListener("click", () => rodarDigitando(b.dataset.cmd))
-  );
 
-  // ---------- Boot ----------
-  async function boot() {
-    ocupado = true;
-    const passos = [
-      ['<span class="c-comment">[    0.000]</span> Iniciando <span class="c-purple">MariOS</span> 2.0.26', 120],
-      ['<span class="c-comment">[    0.214]</span> Carregando módulos: react, next, supabase <span class="c-green">ok</span>', 140],
-      ['<span class="c-comment">[    0.371]</span> Conectando ao café <span class="c-green">ok</span>', 140],
-      ['<span class="c-comment">[    0.502]</span> Montando /home/mari <span class="c-green">ok</span>', 220],
-    ];
-    for (const [t, ms] of passos) { imprimir(t); await espera(ms); }
-    out.innerHTML = "";
-    imprimir(`<div class="ascii">${esc(ASCII)}</div>`);
-    imprimir(`Olá! Eu sou a <span class="c-pink">${PERFIL.nome}</span>, <span class="c-yellow">${PERFIL.cargo}</span>.`);
-    imprimir(`Digite <span class="c-green">help</span> para ver os comandos ou use os botões abaixo.`);
-    imprimir("");
-    ocupado = false;
-    await rodarDigitando("sobre");
+  // ================= Tema e idioma =================
+  function aplicarTema(t) {
+    tema = t;
+    document.documentElement.dataset.theme = t;
+    const cor = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+    document.querySelector('meta[name="theme-color"]').content = cor;
+    store.set("mari.tema", t);
+    atualizarUI();
+  }
+  function aplicarIdioma(l) {
+    lang = l;
+    store.set("mari.lang", l);
+    document.documentElement.lang = L().htmlLang;
+    atualizarUI();
+  }
+  function atualizarUI() {
+    document.getElementById("prompt-live").innerHTML = prompt();
+    document.getElementById("lang-btn").textContent = L().langBtn;
+    document.querySelector('label[for="cmd"]').textContent = L().inputLabel;
+    document.getElementById("footer").textContent = L().footer.replace("{tema}", tema.charAt(0).toUpperCase() + tema.slice(1));
+    const chips = document.getElementById("chips");
+    chips.innerHTML = "";
+    for (const c of L().chips) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.innerHTML = `<b>$</b> ${c}`;
+      b.addEventListener("click", () => rodarDigitando(c));
+      chips.appendChild(b);
+    }
+  }
+  document.getElementById("lang-btn").addEventListener("click", () => rodarDigitando(`lang ${lang === "pt" ? "en" : "pt"}`));
+
+  // ================= Snake =================
+  function iniciarSnake() {
+    jogando = true; mostrarInput(false);
+    const J = L().jogo;
+    const COLS = 24, ROWS = 14, CEL = Math.max(10, Math.min(18, Math.floor((screen.clientWidth - 44) / COLS)));
+    const box = imprimir(`<div class="game"><span class="tag">${J.titulo}</span> <span class="c-comment">${J.ajuda}</span>
+<canvas width="${COLS * CEL}" height="${ROWS * CEL}" aria-label="Snake"></canvas><span class="c-yellow">0</span>
+<div class="pad"><button data-d="L">←</button><button data-d="U">↑</button><button data-d="D">↓</button><button data-d="R">→</button><button data-d="Q">${J.sair}</button></div></div>`);
+    const cv = box.querySelector("canvas"), ctx = cv.getContext("2d"), placar = box.querySelector(".c-yellow");
+    const cor = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+    let cobra = [{ x: 6, y: 7 }, { x: 5, y: 7 }, { x: 4, y: 7 }], dir = { x: 1, y: 0 }, prox = dir, comida, pontos = 0, timer;
+    const DIRS = { U: { x: 0, y: -1 }, D: { x: 0, y: 1 }, L: { x: -1, y: 0 }, R: { x: 1, y: 0 } };
+    const mudar = (d) => { const n = DIRS[d]; if (n && (n.x !== -dir.x || n.y !== -dir.y)) prox = n; };
+    const novaComida = () => { do { comida = { x: Math.floor(Math.random() * COLS), y: Math.floor(Math.random() * ROWS) }; } while (cobra.some((p) => p.x === comida.x && p.y === comida.y)); };
+    novaComida();
+    function desenhar() {
+      ctx.fillStyle = cor("--bg-darker"); ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.fillStyle = cor("--pink"); ctx.fillRect(comida.x * CEL + 2, comida.y * CEL + 2, CEL - 4, CEL - 4);
+      cobra.forEach((p, i) => { ctx.fillStyle = i ? cor("--green") : cor("--cyan"); ctx.fillRect(p.x * CEL + 1, p.y * CEL + 1, CEL - 2, CEL - 2); });
+    }
+    function passo() {
+      dir = prox;
+      const c = { x: cobra[0].x + dir.x, y: cobra[0].y + dir.y };
+      if (c.x < 0 || c.y < 0 || c.x >= COLS || c.y >= ROWS || cobra.some((p) => p.x === c.x && p.y === c.y)) return fim();
+      cobra.unshift(c);
+      if (c.x === comida.x && c.y === comida.y) { pontos++; placar.textContent = pontos; novaComida(); clearInterval(timer); timer = setInterval(passo, Math.max(60, 130 - pontos * 3)); }
+      else cobra.pop();
+      desenhar();
+    }
+    const teclas = { ArrowUp: "U", ArrowDown: "D", ArrowLeft: "L", ArrowRight: "R", w: "U", s: "D", a: "L", d: "R", W: "U", S: "D", A: "L", D: "R" };
+    function onKey(e) {
+      if (e.key === "Escape" || e.key === "q") { e.preventDefault(); return fim(); }
+      if (teclas[e.key]) { e.preventDefault(); mudar(teclas[e.key]); }
+    }
+    let toque = null;
+    cv.addEventListener("touchstart", (e) => { toque = e.touches[0]; }, { passive: true });
+    cv.addEventListener("touchend", (e) => {
+      if (!toque) return;
+      const t = e.changedTouches[0], dx = t.clientX - toque.clientX, dy = t.clientY - toque.clientY;
+      if (Math.max(Math.abs(dx), Math.abs(dy)) > 20) mudar(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "R" : "L") : (dy > 0 ? "D" : "U"));
+      toque = null;
+    });
+    box.querySelectorAll(".pad button").forEach((b) => b.addEventListener("click", () => b.dataset.d === "Q" ? fim() : mudar(b.dataset.d)));
+    let acabou = false;
+    function fim() {
+      if (acabou) return; acabou = true;
+      clearInterval(timer); document.removeEventListener("keydown", onKey);
+      box.querySelector(".pad").remove();
+      const rec = Math.max(pontos, +(store.get("mari.snake") || 0)); store.set("mari.snake", rec);
+      jogando = false;
+      imprimir(J.fim(pontos, rec)); imprimir("");
+      mostrarInput(true);
+    }
+    document.addEventListener("keydown", onKey);
+    input.blur();
+    desenhar();
+    timer = setInterval(passo, 130);
   }
 
+  // ================= Boot =================
+  async function boot() {
+    ocupado = true;
+    const B = L().boot;
+    const tempos = ["0.000", "0.214", "0.371", "0.502"];
+    for (let i = 0; i < B.length; i++) { imprimir(`<span class="c-comment">[    ${tempos[i]}]</span> ${B[i]}${i ? ' <span class="c-green">ok</span>' : ""}`); await espera(150); }
+    await espera(150);
+    out.innerHTML = "";
+    imprimir(`<div class="ascii">${esc(ASCII)}</div>`);
+    imprimir(L().hello(PERFIL.nome, L().cargo));
+    imprimir(L().hint);
+    imprimir("");
+    ocupado = false;
+    await rodarDigitando(nomeCmd("sobre"));
+  }
+
+  document.documentElement.dataset.theme = tema;
+  document.documentElement.lang = L().htmlLang;
+  aplicarTema(tema);
   boot();
 })();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

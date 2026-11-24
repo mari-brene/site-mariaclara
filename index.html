@@ -1,69 +1,400 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maria Clara Brene – Treinamento em informática</title>
-<meta name="description" content="Treinamento em informática em Joinville/SC. MARIA CLARA GALVAO GOMES BRENE, CNPJ 52.211.637/0001-20.">
+<title>Maria Clara Brene — Desenvolvedora Júnior</title>
+<meta name="description" content="Maria Clara Brene, Desenvolvedora Júnior em Joinville/SC. Next.js, React, TypeScript e Supabase.">
+<meta property="og:title" content="Maria Clara Brene — Desenvolvedora Júnior">
+<meta property="og:description" content="Portfólio em formato de terminal. Digite help para começar.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#282a36">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#f8fafc; --card:#ffffff; --text:#1e293b; --muted:#475569; --line:#e2e8f0; --brand:#4f46e5; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#0f172a; --card:#1e293b; --text:#f1f5f9; --muted:#cbd5e1; --line:#334155; --brand:#a5b4fc; }
+  :root {
+    --bg: #282a36;
+    --bg-dark: #21222c;
+    --bg-darker: #191a21;
+    --line: #44475a;
+    --fg: #f8f8f2;
+    --comment: #6272a4;
+    --cyan: #8be9fd;
+    --green: #50fa7b;
+    --orange: #ffb86c;
+    --pink: #ff79c6;
+    --purple: #bd93f9;
+    --red: #ff5555;
+    --yellow: #f1fa8c;
+    --mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
   }
   * { box-sizing: border-box; }
-  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
-  header, main, footer > div { width:100%; max-width:760px; margin:0 auto; padding-left:16px; padding-right:16px; }
-  header { padding-top:20px; padding-bottom:20px; font-weight:700; }
-  main { flex:1; padding-top:24px; padding-bottom:32px; }
-  h1 { font-size:2rem; line-height:1.2; margin:0 0 12px; }
-  h2 { font-size:1.1rem; margin:0 0 8px; }
-  p { margin:0 0 12px; color:var(--muted); }
-  .lead { font-size:1.15rem; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; margin-top:20px; }
-  ul { margin:0; padding-left:20px; color:var(--muted); }
-  li { margin-bottom:6px; }
-  a { color:var(--brand); }
-  footer { border-top:1px solid var(--line); background:var(--card); }
-  footer > div { padding-top:20px; padding-bottom:24px; font-size:.9rem; color:var(--muted); }
-  footer strong { color:var(--text); }
-  footer p { margin:0 0 4px; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg-darker);
+    background-image: radial-gradient(circle at 20% 10%, rgba(189,147,249,.10), transparent 40%),
+                      radial-gradient(circle at 85% 90%, rgba(255,121,198,.08), transparent 40%);
+    color: var(--fg);
+    font: 15px/1.6 var(--mono);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  .window {
+    width: min(920px, 100%);
+    height: min(640px, calc(100vh - 120px));
+    min-height: 420px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--line);
+    user-select: none;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: var(--red); } .dot.y { background: var(--yellow); } .dot.g { background: var(--green); }
+  .titlebar .title { flex: 1; text-align: center; color: var(--comment); font-size: 13px; margin-right: 52px; }
+  #screen {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 20px 24px;
+    cursor: text;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+  .line { white-space: pre-wrap; word-break: break-word; min-height: 1.6em; }
+  .prompt-user { color: var(--purple); }
+  .prompt-at { color: var(--fg); }
+  .prompt-host { color: var(--cyan); }
+  .prompt-path { color: var(--pink); }
+  .cmd { color: var(--green); }
+  .c-cyan { color: var(--cyan); } .c-green { color: var(--green); } .c-pink { color: var(--pink); }
+  .c-purple { color: var(--purple); } .c-yellow { color: var(--yellow); } .c-orange { color: var(--orange); }
+  .c-red { color: var(--red); } .c-comment { color: var(--comment); }
+  .tag { background: var(--pink); color: var(--bg); font-weight: 700; padding: 0 6px; }
+  a { color: var(--cyan); text-decoration: none; border-bottom: 1px dashed var(--comment); }
+  a:hover, a:focus-visible { color: var(--pink); border-bottom-color: var(--pink); outline: none; }
+  .ascii { color: var(--purple); line-height: 1.15; font-size: 12px; margin: 4px 0 10px; white-space: pre; overflow-x: auto; }
+  .input-row { display: flex; align-items: baseline; white-space: pre; }
+  .input-wrap { position: relative; flex: 1; }
+  #cmd {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--fg);
+    font: inherit;
+    caret-color: transparent;
+    padding: 0;
+  }
+  #ghost { position: absolute; left: 0; top: 0; pointer-events: none; white-space: pre; }
+  #ghost .typed { visibility: hidden; }
+  #ghost .cursor {
+    display: inline-block; width: .6em; height: 1.15em; vertical-align: text-bottom;
+    background: var(--fg); animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .grid { display: grid; grid-template-columns: max-content 1fr; column-gap: 18px; }
+  .bar { display: inline-block; height: .7em; background: var(--line); width: 160px; vertical-align: middle; border-radius: 2px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--purple); }
+  .chips {
+    width: min(920px, 100%);
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin-top: 14px;
+  }
+  .chips button {
+    font: 13px var(--mono);
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .chips button:hover, .chips button:focus-visible { border-color: var(--purple); color: var(--purple); outline: none; }
+  .chips button b { color: var(--green); font-weight: 400; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  footer { margin-top: 12px; color: var(--comment); font-size: 12px; text-align: center; }
+  @media (max-width: 600px) {
+    body { font-size: 13px; padding: 12px 8px; justify-content: flex-start; }
+    .window { height: calc(100vh - 150px); }
+    .ascii { font-size: 8px; }
+    .bar { width: 90px; }
+    .titlebar .title { margin-right: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { #ghost .cursor { animation: none; } }
 </style>
 </head>
 <body>
-<header>Maria Clara Brene</header>
 
-<main>
-  <h1>Treinamento em informática</h1>
-  <p class="lead">Aulas e treinamentos de informática para pessoas e pequenos negócios, em Joinville, Santa Catarina.</p>
-
-  <section class="card">
-    <h2>Como atendemos</h2>
-    <ul>
-      <li>Aulas e treinamentos de informática, combinados diretamente com cada cliente.</li>
-      <li>Atendimento por telefone, e-mail e WhatsApp.</li>
-      <li>Só enviamos mensagens comerciais por WhatsApp a quem autorizou receber. Quem escrever SAIR deixa de receber.</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2>Contato</h2>
-    <p>Telefone e WhatsApp: <a href="tel:+5547988214373">(47) 98821-4373</a></p>
-    <p>E-mail: <a href="mailto:mariaaclmatos@gmail.com">mariaaclmatos@gmail.com</a></p>
-  </section>
-
-  <section class="card" id="privacidade">
-    <h2>Privacidade</h2>
-    <p>Usamos nome, telefone e e-mail de clientes e interessados apenas para atendimento e para enviar mensagens que eles aceitaram receber. Não vendemos nem repassamos esses dados. Para consultar, corrigir ou apagar seus dados, escreva para <a href="mailto:mariaaclmatos@gmail.com">mariaaclmatos@gmail.com</a>.</p>
-  </section>
+<main class="window" aria-label="Terminal interativo do portfólio">
+  <div class="titlebar" aria-hidden="true">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span class="title">mari@portfolio: ~</span>
+  </div>
+  <div id="screen" role="log" aria-live="polite">
+    <div id="output"></div>
+    <div class="input-row" id="input-row" hidden>
+      <span id="prompt-live"></span>
+      <div class="input-wrap">
+        <label for="cmd" class="sr-only">Digite um comando</label>
+        <input id="cmd" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send">
+        <span id="ghost" aria-hidden="true"><span class="typed"></span><span class="cursor"></span></span>
+      </div>
+    </div>
+  </div>
 </main>
 
-<footer>
-  <div>
-    <p><strong>MARIA CLARA GALVAO GOMES BRENE</strong></p>
-    <p>CNPJ 52.211.637/0001-20</p>
-    <p>Agostinho dos Santos, 961 – Joinville/SC – CEP 89228-440</p>
-    <p>(47) 98821-4373 · mariaaclmatos@gmail.com</p>
-  </div>
-</footer>
+<nav class="chips" aria-label="Comandos rápidos">
+  <button data-cmd="sobre"><b>$</b> sobre</button>
+  <button data-cmd="stack"><b>$</b> stack</button>
+  <button data-cmd="projetos"><b>$</b> projetos</button>
+  <button data-cmd="formacao"><b>$</b> formacao</button>
+  <button data-cmd="contato"><b>$</b> contato</button>
+  <button data-cmd="help"><b>$</b> help</button>
+  <button data-cmd="clear"><b>$</b> clear</button>
+</nav>
+
+<footer>Tema Dracula · Feito por Maria Clara Brene</footer>
+
+<script>
+(() => {
+  // ---------- Dados ----------
+  const PERFIL = {
+    nome: "Maria Clara Brene",
+    cargo: "Desenvolvedora Júnior",
+    local: "Joinville, SC — Brasil",
+    email: "brenemariaclara@gmail.com",
+    links: {
+      github: "https://github.com/mari-brene",
+      linkedin: "https://www.linkedin.com/in/maria-clara-galvao",
+      instagram: "https://www.instagram.com/mgalvao.png",
+      spotify: "https://open.spotify.com/user/22i3f4d5jbavg5gfcmtroaizq",
+    },
+  };
+
+  const PROMPT = '<span class="prompt-user">mari</span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-at">:</span><span class="prompt-path">~</span><span class="prompt-at">$ </span>';
+
+  const ASCII = String.raw`
+ __  __            _      ____ _
+|  \/  | __ _ _ __(_)    / ___| | __ _ _ __ __ _
+| |\/| |/ _\` | '__| |   | |   | |/ _\` | '__/ _\` |
+| |  | | (_| | |  | |   | |___| | (_| | | | (_| |
+|_|  |_|\__,_|_|  |_|    \____|_|\__,_|_|  \__,_|`;
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const link = (href, txt) => `<a href="${href}" target="_blank" rel="noopener">${esc(txt || href)}</a>`;
+  const linha = (rotulo, valor) => `<span class="c-cyan">${rotulo}</span><span>${valor}</span>`;
+
+  const COMANDOS = {
+    help: {
+      desc: "lista os comandos",
+      run: () => {
+        const itens = Object.entries(COMANDOS)
+          .filter(([, c]) => !c.oculto)
+          .map(([n, c]) => `<span class="c-green">${n}</span><span class="c-comment">${c.desc}</span>`)
+          .join("");
+        return `<div class="grid">${itens}</div>
+<span class="c-comment">Dica: use Tab para completar e ↑ ↓ para o histórico.</span>`;
+      },
+    },
+    sobre: {
+      desc: "quem eu sou",
+      run: () => `<span class="tag">${PERFIL.nome}</span>
+<div class="grid">${linha("cargo", PERFIL.cargo)}${linha("local", PERFIL.local)}${linha("foco", "aplicações web full stack com Next.js e Supabase")}</div>
+Gosto de transformar processos manuais em sistemas simples de usar. Hoje construo um CRM multi-clientes com Kanban, caixa de entrada, integração com WhatsApp e respostas com IA — do banco de dados ao deploy.
+<span class="c-comment"># veja também: stack, projetos, contato</span>`,
+    },
+    whoami: { desc: "", oculto: true, run: () => `<span class="c-purple">mari</span> — ${PERFIL.cargo}` },
+    stack: {
+      desc: "tecnologias que uso",
+      run: () => {
+        const grupos = [
+          ["front-end", "React · Next.js · TypeScript · JavaScript · HTML · CSS"],
+          ["back-end", "Node.js · API Routes · Supabase · PostgreSQL · MySQL · PHP"],
+          ["devops", "Git · GitHub Actions · Vercel"],
+          ["mobile", "Flutter · Dart · Android"],
+          ["jogos", "Unity · C# · Lua"],
+          ["outras", "C · C++ · Java · Python · Linux · Figma"],
+        ];
+        return `<div class="grid">${grupos.map(([g, t]) => linha(g, t)).join("")}</div>`;
+      },
+    },
+    projetos: {
+      desc: "o que estou construindo",
+      run: () => `<span class="tag">Sistema Leads MVP</span>  ${link("https://github.com/mari-brene/sistema-leads-mvp", "github.com/mari-brene/sistema-leads-mvp")}
+CRM multi-clientes para prospecção e atendimento via WhatsApp.
+<span class="c-green">✓</span> Kanban de leads e caixa de entrada em 3 colunas
+<span class="c-green">✓</span> Isolamento entre clientes com papéis (admin, gestor, atendente)
+<span class="c-green">✓</span> Busca de empresas via OpenStreetMap e importação de CSV
+<span class="c-green">✓</span> Autoresponder e prospecção assistida com IA (Groq / Gemini)
+<span class="c-green">✓</span> Integração com Google Agenda e agendador com GitHub Actions
+<span class="c-comment">stack:</span> <span class="c-yellow">Next.js · TypeScript · Supabase · Vercel</span>
+
+<span class="c-comment"># mais projetos em</span> ${link(PERFIL.links.github, "github.com/mari-brene")}`,
+    },
+    formacao: {
+      desc: "formação acadêmica",
+      run: () => `<div class="grid">${[
+        ["2025", "Análise e Desenvolvimento de Sistemas — IFTM"],
+        ["2028*", "Jogos Digitais — UNOPAR <span class=\"c-comment\">(em andamento)</span>"],
+        ["2019", "Técnico em Eletrônica — IFTM"],
+      ].map(([a, c]) => `<span class="c-orange">${a}</span><span>${c}</span>`).join("")}</div>`,
+    },
+    contato: {
+      desc: "onde me encontrar",
+      run: () => `<div class="grid">${[
+        ["email", `<a href="mailto:${PERFIL.email}">${PERFIL.email}</a>`],
+        ["linkedin", link(PERFIL.links.linkedin, "in/maria-clara-galvao")],
+        ["github", link(PERFIL.links.github, "mari-brene")],
+        ["instagram", link(PERFIL.links.instagram, "@mgalvao.png")],
+        ["spotify", link(PERFIL.links.spotify, "o que estou ouvindo")],
+      ].map(([r, v]) => linha(r, v)).join("")}</div>
+<span class="c-green">Aberta a oportunidades como ${PERFIL.cargo}.</span>`,
+    },
+    github: { desc: "abre meu GitHub", run: () => abrir(PERFIL.links.github) },
+    linkedin: { desc: "abre meu LinkedIn", run: () => abrir(PERFIL.links.linkedin) },
+    email: { desc: "envia um e-mail", run: () => { location.href = `mailto:${PERFIL.email}`; return `<span class="c-comment">abrindo o cliente de e-mail...</span>`; } },
+    clear: { desc: "limpa a tela", run: () => { out.innerHTML = ""; return null; } },
+    date: { desc: "", oculto: true, run: () => new Date().toLocaleString("pt-BR") },
+    ls: { desc: "", oculto: true, run: () => `<span class="c-cyan">sobre/</span>  <span class="c-cyan">stack/</span>  <span class="c-cyan">projetos/</span>  <span class="c-cyan">formacao/</span>  contato.txt` },
+    sudo: { desc: "", oculto: true, run: () => `<span class="c-red">mari não está no arquivo sudoers.</span> Este incidente será reportado. ;)` },
+    exit: { desc: "", oculto: true, run: () => `<span class="c-comment">Não tem como sair daqui. Que tal</span> <span class="c-green">contato</span><span class="c-comment">?</span>` },
+  };
+
+  function abrir(url) {
+    window.open(url, "_blank", "noopener");
+    return `<span class="c-comment">abrindo</span> ${link(url)}`;
+  }
+
+  // ---------- Terminal ----------
+  const screen = document.getElementById("screen");
+  const out = document.getElementById("output");
+  const row = document.getElementById("input-row");
+  const input = document.getElementById("cmd");
+  const ghostTyped = document.querySelector("#ghost .typed");
+  document.getElementById("prompt-live").innerHTML = PROMPT;
+
+  const reduzido = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const historico = [];
+  let posHist = 0;
+  let ocupado = false;
+
+  const rolar = () => { screen.scrollTop = screen.scrollHeight; };
+  const imprimir = (html, cls = "") => {
+    const div = document.createElement("div");
+    div.className = "line " + cls;
+    div.innerHTML = html;
+    out.appendChild(div);
+    rolar();
+    return div;
+  };
+  const espera = (ms) => new Promise((r) => setTimeout(r, reduzido ? 0 : ms));
+
+  async function digitar(texto) {
+    const div = imprimir(PROMPT + '<span class="cmd"></span>');
+    const alvo = div.querySelector(".cmd");
+    for (const ch of texto) { alvo.textContent += ch; await espera(55 + Math.random() * 50); }
+    await espera(250);
+  }
+
+  function executar(bruto, ecoar = true) {
+    const texto = bruto.trim();
+    if (ecoar) imprimir(PROMPT + `<span class="cmd">${esc(texto)}</span>`);
+    if (!texto) return;
+    historico.push(texto);
+    posHist = historico.length;
+    const nome = texto.split(/\s+/)[0].toLowerCase();
+    const cmd = COMANDOS[nome];
+    if (!cmd) {
+      imprimir(`<span class="c-red">comando não encontrado:</span> ${esc(nome)} — digite <span class="c-green">help</span>`);
+      return;
+    }
+    const res = cmd.run();
+    if (res) imprimir(res);
+    imprimir("");
+  }
+
+  async function rodarDigitando(texto) {
+    if (ocupado) return;
+    ocupado = true;
+    row.hidden = true;
+    await digitar(texto);
+    executar(texto, false);
+    row.hidden = false;
+    ocupado = false;
+    focar();
+  }
+
+  function focar() { if (!ocupado) input.focus({ preventScroll: true }); rolar(); }
+  const sincronizarGhost = () => { ghostTyped.textContent = input.value.slice(0, input.selectionStart ?? input.value.length); };
+
+  input.addEventListener("input", sincronizarGhost);
+  input.addEventListener("keyup", sincronizarGhost);
+  input.addEventListener("click", sincronizarGhost);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      executar(input.value);
+      input.value = "";
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (posHist > 0) input.value = historico[--posHist];
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      posHist = Math.min(posHist + 1, historico.length);
+      input.value = historico[posHist] || "";
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      const v = input.value.trim().toLowerCase();
+      const opcoes = Object.keys(COMANDOS).filter((c) => !COMANDOS[c].oculto && c.startsWith(v));
+      if (opcoes.length === 1) input.value = opcoes[0];
+      else if (opcoes.length > 1) { imprimir(PROMPT + esc(input.value)); imprimir(opcoes.map((o) => `<span class="c-green">${o}</span>`).join("  ")); }
+    } else if (e.key === "l" && e.ctrlKey) {
+      e.preventDefault();
+      out.innerHTML = "";
+    }
+    requestAnimationFrame(sincronizarGhost);
+  });
+
+  screen.addEventListener("click", () => { if (!getSelection().toString()) focar(); });
+  document.querySelectorAll(".chips button").forEach((b) =>
+    b.addEventListener("click", () => rodarDigitando(b.dataset.cmd))
+  );
+
+  // ---------- Boot ----------
+  async function boot() {
+    ocupado = true;
+    const passos = [
+      ['<span class="c-comment">[    0.000]</span> Iniciando <span class="c-purple">MariOS</span> 2.0.26', 120],
+      ['<span class="c-comment">[    0.214]</span> Carregando módulos: react, next, supabase <span class="c-green">ok</span>', 140],
+      ['<span class="c-comment">[    0.371]</span> Conectando ao café <span class="c-green">ok</span>', 140],
+      ['<span class="c-comment">[    0.502]</span> Montando /home/mari <span class="c-green">ok</span>', 220],
+    ];
+    for (const [t, ms] of passos) { imprimir(t); await espera(ms); }
+    out.innerHTML = "";
+    imprimir(`<div class="ascii">${esc(ASCII)}</div>`);
+    imprimir(`Olá! Eu sou a <span class="c-pink">${PERFIL.nome}</span>, <span class="c-yellow">${PERFIL.cargo}</span>.`);
+    imprimir(`Digite <span class="c-green">help</span> para ver os comandos ou use os botões abaixo.`);
+    imprimir("");
+    ocupado = false;
+    await rodarDigitando("sobre");
+  }
+
+  boot();
+})();
+</script>
 </body>
 </html>

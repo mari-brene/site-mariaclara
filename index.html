@@ -44,6 +44,7 @@
   }
   :root { --mono: "JetBrains Mono", "Fira Code", Consolas, monospace; }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html, body { height: 100%; margin: 0; }
   body {
     background: var(--bg-darker);
@@ -201,7 +202,7 @@
       local: "Joinville, SC — Brasil",
       langBtn: "EN",
       footer: "Tema {tema} · Feito por Maria Clara Brene",
-      chips: ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "help"],
+      chips: ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "neofetch", "github", "tema", "snake", "help"],
       inputLabel: "Digite um comando",
       boot: ["Iniciando <span class=\"c-purple\">MariOS</span> 2.0.26", "Carregando módulos: react, next, flutter, supabase", "Conectando ao café", "Montando /home/mari"],
       hello: (n, c) => `Olá! Eu sou a <span class="c-pink">${n}</span>, <span class="c-yellow">${c}</span>.`,
@@ -283,7 +284,7 @@ Também tenho experiência em liderança de equipe e em ensinar programação.`,
       local: "Joinville, SC — Brazil",
       langBtn: "PT",
       footer: "{tema} theme · Made by Maria Clara Brene",
-      chips: ["about", "experience", "projects", "stack", "education", "resume", "contact", "help"],
+      chips: ["about", "experience", "projects", "stack", "education", "resume", "contact", "neofetch", "github", "theme", "snake", "help"],
       inputLabel: "Type a command",
       boot: ["Booting <span class=\"c-purple\">MariOS</span> 2.0.26", "Loading modules: react, next, flutter, supabase", "Connecting to coffee", "Mounting /home/mari"],
       hello: (n, c) => `Hi! I'm <span class="c-pink">${n}</span>, <span class="c-yellow">${c}</span>.`,
@@ -625,7 +626,11 @@ ${p.desc}
       const b = document.createElement("button");
       b.type = "button";
       b.innerHTML = `<b>$</b> ${c}`;
-      b.addEventListener("click", () => rodarDigitando(c));
+      b.addEventListener("click", () => {
+        // o botão de tema avança para o próximo tema
+        if (c === "tema" || c === "theme") return rodarDigitando(`${c} ${TEMAS[(TEMAS.indexOf(tema) + 1) % TEMAS.length]}`);
+        rodarDigitando(c);
+      });
       chips.appendChild(b);
     }
   }

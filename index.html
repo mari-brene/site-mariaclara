@@ -183,6 +183,7 @@
       linkedin: "https://www.linkedin.com/in/maria-clara-galvao",
       instagram: "https://www.instagram.com/mgalvao.png",
       spotify: "https://open.spotify.com/user/22i3f4d5jbavg5gfcmtroaizq",
+      whatsapp: "https://wa.me/5538999368705",
     },
   };
 
@@ -258,6 +259,7 @@ CRM multi-clientes para prospecção e atendimento via WhatsApp.
       desc: "onde me encontrar",
       run: () => `<div class="grid">${[
         ["email", `<a href="mailto:${PERFIL.email}">${PERFIL.email}</a>`],
+        ["whatsapp", link(PERFIL.links.whatsapp, "(38) 99936-8705")],
         ["linkedin", link(PERFIL.links.linkedin, "in/maria-clara-galvao")],
         ["github", link(PERFIL.links.github, "mari-brene")],
         ["instagram", link(PERFIL.links.instagram, "@mgalvao.png")],
@@ -267,6 +269,7 @@ CRM multi-clientes para prospecção e atendimento via WhatsApp.
     },
     github: { desc: "abre meu GitHub", run: () => abrir(PERFIL.links.github) },
     linkedin: { desc: "abre meu LinkedIn", run: () => abrir(PERFIL.links.linkedin) },
+    whatsapp: { desc: "abre conversa no WhatsApp", run: () => abrir(PERFIL.links.whatsapp) },
     email: { desc: "envia um e-mail", run: () => { location.href = `mailto:${PERFIL.email}`; return `<span class="c-comment">abrindo o cliente de e-mail...</span>`; } },
     clear: { desc: "limpa a tela", run: () => { out.innerHTML = ""; return null; } },
     date: { desc: "", oculto: true, run: () => new Date().toLocaleString("pt-BR") },

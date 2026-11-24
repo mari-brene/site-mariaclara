@@ -202,7 +202,7 @@
       local: "Joinville, SC — Brasil",
       langBtn: "EN",
       footer: "Tema {tema} · Feito por Maria Clara Brene",
-      chips: ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "neofetch", "github", "tema", "snake", "help"],
+      chips: ["sobre", "experiencia", "projetos", "stack", "formacao", "curriculo", "contato", "neofetch", "github", "tema", "snake", "nave", "help"],
       inputLabel: "Digite um comando",
       boot: ["Iniciando <span class=\"c-purple\">MariOS</span> 2.0.26", "Carregando módulos: react, next, flutter, supabase", "Conectando ao café", "Montando /home/mari"],
       hello: (n, c) => `Olá! Eu sou a <span class="c-pink">${n}</span>, <span class="c-yellow">${c}</span>.`,
@@ -273,9 +273,10 @@ Também tenho experiência em liderança de equipe e em ensinar programação.`,
       temaErro: (t) => `<span class="c-red">tema desconhecido:</span> ${t}`,
       langOk: "idioma: português",
       ls: `<span class="c-cyan">sobre/</span>  <span class="c-cyan">experiencia/</span>  <span class="c-cyan">projetos/</span>  <span class="c-cyan">jogos/</span>  curriculo.pdf  contato.txt`,
-      lsJogos: `<span class="c-green">snake</span>  <span class="c-comment"># digite o nome para jogar</span>`,
+      lsJogos: `<span class="c-green">snake</span>  <span class="c-green">nave</span>  <span class="c-comment"># digite o nome para jogar</span>`,
       sudo: `<span class="c-red">mari não está no arquivo sudoers.</span> Este incidente será reportado. ;)`,
       exit: `<span class="c-comment">Não tem como sair daqui. Que tal</span> <span class="c-green">contato</span><span class="c-comment">?</span>`,
+      nave: { titulo: "NAVE", ajuda: "← → / A D ou arraste · tiro automático · Esc sai", hud: (p, v, o) => `pontos ${p}   vidas ${v}   onda ${o}`, fim: (p, r) => `fim de jogo! pontos: <span class="c-yellow">${p}</span> · recorde: <span class="c-pink">${r}</span>`, sair: "sair" },
       jogo: { titulo: "SNAKE", ajuda: "setas/WASD ou deslize · Esc sai", fim: (p, r) => `fim de jogo! pontos: <span class="c-yellow">${p}</span> · recorde: <span class="c-pink">${r}</span>`, sair: "sair" },
     },
     en: {
@@ -284,7 +285,7 @@ Também tenho experiência em liderança de equipe e em ensinar programação.`,
       local: "Joinville, SC — Brazil",
       langBtn: "PT",
       footer: "{tema} theme · Made by Maria Clara Brene",
-      chips: ["about", "experience", "projects", "stack", "education", "resume", "contact", "neofetch", "github", "theme", "snake", "help"],
+      chips: ["about", "experience", "projects", "stack", "education", "resume", "contact", "neofetch", "github", "theme", "snake", "spaceship", "help"],
       inputLabel: "Type a command",
       boot: ["Booting <span class=\"c-purple\">MariOS</span> 2.0.26", "Loading modules: react, next, flutter, supabase", "Connecting to coffee", "Mounting /home/mari"],
       hello: (n, c) => `Hi! I'm <span class="c-pink">${n}</span>, <span class="c-yellow">${c}</span>.`,
@@ -355,9 +356,10 @@ I also have experience leading teams and teaching programming.`,
       temaErro: (t) => `<span class="c-red">unknown theme:</span> ${t}`,
       langOk: "language: english",
       ls: `<span class="c-cyan">about/</span>  <span class="c-cyan">experience/</span>  <span class="c-cyan">projects/</span>  <span class="c-cyan">games/</span>  resume.pdf  contact.txt`,
-      lsJogos: `<span class="c-green">snake</span>  <span class="c-comment"># type its name to play</span>`,
+      lsJogos: `<span class="c-green">snake</span>  <span class="c-green">spaceship</span>  <span class="c-comment"># type its name to play</span>`,
       sudo: `<span class="c-red">mari is not in the sudoers file.</span> This incident will be reported. ;)`,
       exit: `<span class="c-comment">There's no way out. How about</span> <span class="c-green">contact</span><span class="c-comment">?</span>`,
+      nave: { titulo: "SPACESHIP", ajuda: "← → / A D or drag · auto fire · Esc quits", hud: (p, v, o) => `score ${p}   lives ${v}   wave ${o}`, fim: (p, r) => `game over! score: <span class="c-yellow">${p}</span> · best: <span class="c-pink">${r}</span>`, sair: "quit" },
       jogo: { titulo: "SNAKE", ajuda: "arrows/WASD or swipe · Esc quits", fim: (p, r) => `game over! score: <span class="c-yellow">${p}</span> · best: <span class="c-pink">${r}</span>`, sair: "quit" },
     },
   };
@@ -366,6 +368,7 @@ I also have experience leading teams and teaching programming.`,
   const ALIAS = {
     about: "sobre", experience: "experiencia", projects: "projetos", education: "formacao",
     resume: "curriculo", cv: "curriculo", contact: "contato", theme: "tema", language: "lang",
+    spaceship: "nave", ship: "nave", space: "nave", "space-shooter": "nave", navezinha: "nave",
     "experiência": "experiencia", "formação": "formacao", "currículo": "curriculo", whoami: "sobre",
   };
   // nome mostrado no help conforme idioma
@@ -514,6 +517,7 @@ ${p.desc}
     ls: { run: (a) => (a[0] || "").replace(/\/$/, "").match(/^(jogos|games)$/) ? L().lsJogos : L().ls },
     cd: { run: (a) => (a[0] || "").replace(/\/$/, "").match(/^(jogos|games)$/) ? L().lsJogos : "" },
     snake: { run: () => { iniciarSnake(); return null; } },
+    nave: { run: () => { iniciarNave(); return null; } },
     sudo: { run: () => L().sudo },
     exit: { run: () => L().exit },
     date: { run: () => new Date().toLocaleString(lang === "pt" ? "pt-BR" : "en") },
@@ -693,6 +697,122 @@ ${p.desc}
     input.blur();
     desenhar();
     timer = setInterval(passo, 130);
+  }
+
+  // ================= Nave =================
+  function iniciarNave() {
+    jogando = true; mostrarInput(false);
+    const J = L().nave;
+    const W = Math.max(280, Math.min(520, screen.clientWidth - 44)), H = 320;
+    const box = imprimir(`<div class="game"><span class="tag">${J.titulo}</span> <span class="c-comment">${J.ajuda}</span>
+<canvas width="${W}" height="${H}" aria-label="${J.titulo}"></canvas>
+<div class="pad"><button data-d="L">←</button><button data-d="R">→</button><button data-d="Q">${J.sair}</button></div></div>`);
+    const cv = box.querySelector("canvas"), ctx = cv.getContext("2d");
+    const cor = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+    const C = { bg: cor("--bg-darker"), nave: cor("--cyan"), tiro: cor("--yellow"), txt: cor("--comment"), fg: cor("--fg"),
+      niveis: [cor("--comment"), cor("--purple"), cor("--pink"), cor("--red")] };
+    const TAM = 14, GAP = 4;
+    const nave = { x: W / 2, y: H - 22, w: 24, h: 16, vx: 0 };
+    let tiros = [], inimigos = [], faiscas = [], estrelas = [];
+    let pontos = 0, vidas = 3, onda = 0, quadro = 0, invul = 0, raf, acabou = false;
+    const esq = new Set();
+    for (let i = 0; i < 40; i++) estrelas.push({ x: Math.random() * W, y: Math.random() * H, v: 0.3 + Math.random() * 0.9 });
+
+    function novaOnda() {
+      onda++;
+      const cols = Math.min(Math.floor((W - 110) / (TAM + GAP)), 14), linhas = Math.min(2 + onda, 6);
+      const x0 = (W - cols * (TAM + GAP)) / 2;
+      for (let r = 0; r < linhas; r++) for (let c = 0; c < cols; c++) {
+        if (Math.random() < 0.35) continue; // buracos, como um gráfico de contribuições
+        const nivel = 1 + Math.min(3, Math.floor(Math.random() * (1 + onda / 2)));
+        inimigos.push({ x: x0 + c * (TAM + GAP), y: 28 + r * (TAM + GAP) - linhas * (TAM + GAP), hp: nivel, nivel });
+      }
+    }
+    function explodir(x, y, c) { for (let i = 0; i < 8; i++) faiscas.push({ x, y, vx: (Math.random() - .5) * 4, vy: (Math.random() - .5) * 4, t: 20, c }); }
+    function acertado() {
+      if (invul) return;
+      vidas--; invul = 90; explodir(nave.x, nave.y, C.nave);
+      if (vidas <= 0) fim();
+    }
+
+    function passo() {
+      quadro++;
+      const dir = (esq.has("R") ? 1 : 0) - (esq.has("L") ? 1 : 0);
+      nave.x = Math.max(nave.w / 2, Math.min(W - nave.w / 2, nave.x + dir * 4.5));
+      if (quadro % 14 === 0) tiros.push({ x: nave.x, y: nave.y - nave.h / 2 });
+      tiros.forEach((t) => (t.y -= 7));
+      tiros = tiros.filter((t) => t.y > -10);
+      const vel = 0.18 + onda * 0.06, balanco = Math.sin(quadro / 40) * 0.35;
+      for (const e of inimigos) {
+        e.y += vel; e.x += balanco;
+        for (const t of tiros) if (!t.usado && t.x > e.x - 2 && t.x < e.x + TAM + 2 && t.y > e.y && t.y < e.y + TAM) {
+          t.usado = true; e.hp--;
+          if (e.hp <= 0) { pontos += e.nivel * 10; explodir(e.x + TAM / 2, e.y + TAM / 2, C.niveis[e.nivel - 1]); }
+        }
+        if (e.hp > 0 && e.y + TAM > nave.y - nave.h / 2 && Math.abs(e.x + TAM / 2 - nave.x) < nave.w / 2 + TAM / 2) { e.hp = 0; acertado(); }
+        if (e.hp > 0 && e.y > H) { e.hp = 0; acertado(); }
+      }
+      tiros = tiros.filter((t) => !t.usado);
+      inimigos = inimigos.filter((e) => e.hp > 0);
+      faiscas.forEach((f) => { f.x += f.vx; f.y += f.vy; f.t--; });
+      faiscas = faiscas.filter((f) => f.t > 0);
+      estrelas.forEach((s) => { s.y += s.v; if (s.y > H) { s.y = 0; s.x = Math.random() * W; } });
+      if (invul) invul--;
+      if (!inimigos.length && !acabou) novaOnda();
+    }
+
+    function desenhar() {
+      ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = C.txt; estrelas.forEach((s) => ctx.fillRect(s.x, s.y, 1.5, 1.5));
+      for (const e of inimigos) { ctx.fillStyle = C.niveis[e.hp - 1]; ctx.fillRect(e.x, e.y, TAM, TAM); }
+      ctx.fillStyle = C.tiro; tiros.forEach((t) => ctx.fillRect(t.x - 1, t.y - 6, 2, 8));
+      faiscas.forEach((f) => { ctx.globalAlpha = f.t / 20; ctx.fillStyle = f.c; ctx.fillRect(f.x, f.y, 3, 3); });
+      ctx.globalAlpha = 1;
+      if (!(invul && Math.floor(invul / 6) % 2)) {
+        ctx.fillStyle = C.nave;
+        ctx.beginPath();
+        ctx.moveTo(nave.x, nave.y - nave.h / 2);
+        ctx.lineTo(nave.x + nave.w / 2, nave.y + nave.h / 2);
+        ctx.lineTo(nave.x, nave.y + nave.h / 4);
+        ctx.lineTo(nave.x - nave.w / 2, nave.y + nave.h / 2);
+        ctx.closePath(); ctx.fill();
+      }
+      ctx.fillStyle = C.fg; ctx.font = "12px " + getComputedStyle(document.body).fontFamily;
+      ctx.fillText(J.hud(pontos, vidas, onda), 8, 16);
+    }
+    function loop() { if (acabou) return; passo(); desenhar(); raf = requestAnimationFrame(loop); }
+
+    const teclas = { ArrowLeft: "L", ArrowRight: "R", a: "L", d: "R", A: "L", D: "R" };
+    const down = (e) => { if (e.key === "Escape" || e.key === "q") { e.preventDefault(); return fim(); } if (teclas[e.key]) { e.preventDefault(); esq.add(teclas[e.key]); } };
+    const up = (e) => { if (teclas[e.key]) esq.delete(teclas[e.key]); };
+    document.addEventListener("keydown", down);
+    document.addEventListener("keyup", up);
+    // toque: arrastar o dedo no canvas move a nave
+    const moverPara = (clientX) => { const r = cv.getBoundingClientRect(); nave.x = Math.max(nave.w / 2, Math.min(W - nave.w / 2, (clientX - r.left) * (W / r.width))); };
+    cv.addEventListener("pointerdown", (e) => { cv.setPointerCapture(e.pointerId); moverPara(e.clientX); });
+    cv.addEventListener("pointermove", (e) => { if (e.buttons || e.pointerType === "touch") moverPara(e.clientX); });
+    box.querySelectorAll(".pad button").forEach((b) => {
+      const d = b.dataset.d;
+      if (d === "Q") return b.addEventListener("click", fim);
+      b.addEventListener("pointerdown", (e) => { e.preventDefault(); esq.add(d); });
+      ["pointerup", "pointerleave", "pointercancel"].forEach((ev) => b.addEventListener(ev, () => esq.delete(d)));
+    });
+
+    function fim() {
+      if (acabou) return; acabou = true;
+      cancelAnimationFrame(raf);
+      document.removeEventListener("keydown", down); document.removeEventListener("keyup", up);
+      desenhar();
+      box.querySelector(".pad").remove();
+      const rec = Math.max(pontos, +(store.get("mari.nave") || 0)); store.set("mari.nave", rec);
+      jogando = false;
+      imprimir(J.fim(pontos, rec)); imprimir("");
+      mostrarInput(true);
+    }
+
+    input.blur();
+    novaOnda();
+    loop();
   }
 
   // ================= Boot =================
